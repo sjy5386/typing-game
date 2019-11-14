@@ -7,7 +7,7 @@ public class GameFrame extends JFrame {
 	private EditPanel editPanel = new EditPanel();
 	
 	public GameFrame() {
-		super("Å¸ÀÌÇÎ °ÔÀÓ");
+		super("íƒ€ì´í•‘ ê²Œì„");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800,600);
 		setResizable(false);
@@ -20,7 +20,7 @@ public class GameFrame extends JFrame {
 		
 		hPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);		
 		hPane.setDividerLocation(500);
-		hPane.setEnabled(false); // split bar¸¦ ¿òÁ÷ÀÏ ¼ö ¾øµµ·Ï ÇÏ±â À§ÇØ
+		hPane.setEnabled(false); // split barë¥¼ ì›€ì§ì¼ ìˆ˜ ì—†ë„ë¡ í•˜ê¸° ìœ„í•´
 		hPane.setLeftComponent(gamePanel);
 		
 		JSplitPane pPane = new JSplitPane();

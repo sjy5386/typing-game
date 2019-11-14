@@ -3,7 +3,7 @@ import java.awt.Color;
 import javax.swing.*;
 
 public class ScorePanel extends JPanel {
-	private JLabel text = new JLabel("Á¡¼ö");
+	private JLabel text = new JLabel("ì ìˆ˜");
 	private JLabel score = new JLabel("0");
 	public ScorePanel() {
 		setBackground(Color.YELLOW);
