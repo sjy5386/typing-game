@@ -5,7 +5,7 @@ public class GameFrame extends JFrame {
 	private GamePanel gamePanel = new GamePanel();
 	private	ScorePanel scorePanel = new ScorePanel();
 	private EditPanel editPanel = new EditPanel();
-	
+
 	public GameFrame() {
 		super("타이핑 게임");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,8 +26,9 @@ public class GameFrame extends JFrame {
 		JSplitPane pPane = new JSplitPane();
 		hPane.setRightComponent(pPane);
 		pPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		pPane.setDividerLocation(200);
+		pPane.setDividerLocation(70);
 		pPane.setTopComponent(scorePanel);
 		pPane.setBottomComponent(editPanel);
+		pPane.setEnabled(false);
 	}
 }
