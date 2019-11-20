@@ -24,6 +24,7 @@ public class GameFrame extends JFrame {
 		hPane.setDividerLocation(500);
 		hPane.setEnabled(false); // split bar를 움직일 수 없도록 하기 위해
 		hPane.setLeftComponent(gamePanel);
+		hPane.setDividerSize(5);
 		
 		JSplitPane pPane = new JSplitPane();
 		hPane.setRightComponent(pPane);
@@ -32,6 +33,7 @@ public class GameFrame extends JFrame {
 		pPane.setTopComponent(scorePanel);
 		pPane.setBottomComponent(editPanel);
 		pPane.setEnabled(false);
+		pPane.setDividerSize(5);
 	}
 
 	private JMenuBar makeMenu() {
@@ -51,7 +53,7 @@ public class GameFrame extends JFrame {
 		wordMenu.add(new JMenuItem("단어 파일 열기"));
 		wordMenu.add(new JMenuItem("단어 파일 저장"));
 
-		JMenu multiplayerMenu = new JMenu("멀티플레이");
+		JMenu multiplayerMenu = new JMenu("멀티플레이 ");
 		multiplayerMenu.add(new JMenuItem("게임 생성"));
 		multiplayerMenu.add(new JMenuItem("게임 참가"));
 		multiplayerMenu.addSeparator();
@@ -65,6 +67,7 @@ public class GameFrame extends JFrame {
 
 	private JToolBar makeToolBar() {
 		JToolBar toolBar = new JToolBar();
+		toolBar.add(new JLabel("싱글플레이 "));
 		toolBar.add(new JButton("새 클래식 게임"));
 		toolBar.add(new JButton("새 브레인 게임"));
 		toolBar.addSeparator();
@@ -73,6 +76,7 @@ public class GameFrame extends JFrame {
 		toolBar.add(new JLabel("멀티플레이 "));
 		toolBar.add(new JButton("게임 생성"));
 		toolBar.add(new JButton("게임 참가"));
+		toolBar.setFloatable(false);
 		return toolBar;
 	}
 }

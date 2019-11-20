@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class GamePanel extends JPanel {
-	private JTextField inputText = new JTextField(45);
+	private JTextField inputText = new JTextField(40);
 	public GamePanel() {
 		setLayout(new BorderLayout());
 		add(new JGameGroundPanel(), BorderLayout.CENTER);

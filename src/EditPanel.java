@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class EditPanel extends JPanel {
-	private JTextField addWord = new JTextField(25);
+	private JTextField addWord = new JTextField(20);
 	private JButton addButton = new JButton("추가");
 	private JButton saveButton = new JButton("저장");
 	public EditPanel() {
