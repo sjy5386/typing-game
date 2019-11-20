@@ -13,13 +13,13 @@ public class GamePanel extends JPanel {
 	
 	class JGameGroundPanel extends JPanel {
 		public JGameGroundPanel() {
-			setBackground(new Color(220, 250, 255));
+			setBackground(new Color(255, 255, 228));
 			setLayout(null);
 		}
 	}
 	class JInputPanel extends JPanel {
 		public JInputPanel() {
-			setBackground(new Color(220, 250, 255));
+			setBackground(new Color(255, 255, 228));
 			setLayout(new FlowLayout());
 			add(inputText);
 			inputText.addActionListener(new ActionListener() {

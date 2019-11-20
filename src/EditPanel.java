@@ -8,7 +8,7 @@ public class EditPanel extends JPanel {
 	private JButton addButton = new JButton("추가");
 	private JButton saveButton = new JButton("저장");
 	public EditPanel() {
-		setBackground(new Color(195, 250, 255));
+		setBackground(new Color(255, 224,178));
 		setLayout(new FlowLayout());
 		add(addWord);
 		addWord.addActionListener(new ActionListener() {
