@@ -1,24 +1,30 @@
-import java.awt.Color;
-
 import javax.swing.*;
+import java.awt.*;
 
 public class ScorePanel extends JPanel {
-	private JLabel text = new JLabel("점수");
-	private JLabel score = new JLabel("0");
-	private JLabel nowLevel = new JLabel("현재 레벨");
-	public ScorePanel() {
-		setBackground(new Color(203, 174, 130));
-		setLayout(null);
-		text.setSize(70, 30);
-		text.setLocation(10, 10);
-		add(text);
-		
-		score.setSize(100, 30);
-		score.setLocation(70, 10);
-		add(score);
+    private JLabel scoreTextLabel = new JLabel("점수: ");
+    private int score = 0;
+    private JLabel scoreLabel = new JLabel(String.valueOf(score));
+    private JLabel levelTextLabel = new JLabel("레벨: ");
+    private int level = 0;
+    private JLabel levelLabel = new JLabel(String.valueOf(level));
 
-		nowLevel.setSize(70, 30);
-		nowLevel.setLocation(10, 30);
-		add(nowLevel);
-	}
+    public ScorePanel() {
+        setBackground(MyColor.LIGHT);
+        setLayout(new FlowLayout());
+        add(scoreTextLabel);
+        add(scoreLabel);
+        add(levelTextLabel);
+        add(levelLabel);
+    }
+
+    public void setScore(int length){
+        score = score + length;
+        scoreLabel.setText(String.valueOf(score));
+    }
+    public void setLevel(){
+        level = score /100;
+        levelLabel.setText(String.valueOf(level));
+    }
+
 }

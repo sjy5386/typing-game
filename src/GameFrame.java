@@ -1,10 +1,11 @@
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GameFrame extends JFrame {
 	private GamePanel gamePanel = new GamePanel();
-	private	ScorePanel scorePanel = new ScorePanel();
-	private EditPanel editPanel = new EditPanel();
+	private WordDialog wordDialog = new WordDialog(this);
 
 	public GameFrame() {
 		super("타이핑 게임");
@@ -13,27 +14,9 @@ public class GameFrame extends JFrame {
 		setResizable(false);
 		setJMenuBar(makeMenu());
 		add(makeToolBar(), BorderLayout.NORTH);
-		splitPane();
+		add(gamePanel, BorderLayout.CENTER);
 		setVisible(true);
-	}
-	private void splitPane() {
-		JSplitPane hPane = new JSplitPane();
-		getContentPane().add(hPane, BorderLayout.CENTER);
-		
-		hPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);		
-		hPane.setDividerLocation(500);
-		hPane.setEnabled(false); // split bar를 움직일 수 없도록 하기 위해
-		hPane.setLeftComponent(gamePanel);
-		hPane.setDividerSize(5);
-		
-		JSplitPane pPane = new JSplitPane();
-		hPane.setRightComponent(pPane);
-		pPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		pPane.setDividerLocation(70);
-		pPane.setTopComponent(scorePanel);
-		pPane.setBottomComponent(editPanel);
-		pPane.setEnabled(false);
-		pPane.setDividerSize(5);
+		gamePanel.inputText.requestFocus();
 	}
 
 	private JMenuBar makeMenu() {
@@ -48,10 +31,17 @@ public class GameFrame extends JFrame {
 		gameMenu.add(new JMenuItem("끝내기"));
 
 		JMenu wordMenu = new JMenu("단어");
-		wordMenu.add(new JMenuItem("단어 목록"));
-		wordMenu.addSeparator();
-		wordMenu.add(new JMenuItem("단어 파일 열기"));
-		wordMenu.add(new JMenuItem("단어 파일 저장"));
+		JMenuItem wordList = new JMenuItem("단어 목록");
+		wordList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (wordDialog.isVisible())
+                    wordDialog.requestFocus();
+                else
+                    wordDialog.setVisible(true);
+            }
+        });
+		wordMenu.add(wordList);
 
 		JMenu multiplayerMenu = new JMenu("멀티플레이 ");
 		multiplayerMenu.add(new JMenuItem("게임 생성"));
