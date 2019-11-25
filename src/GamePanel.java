@@ -6,7 +6,7 @@ public class GamePanel extends JPanel {
 	private ScorePanel scorePanel = new ScorePanel();
 	private JGameGroundPanel gameGroundPanel = new JGameGroundPanel();
 	private JInputPanel inputPanel = new JInputPanel();
-	private WordManager manager = new WordManager();
+	private WordManager manager = GameApp.wordManager;
 	private String randomWord = manager.getRandomWord();
 	private WordLabel makeLabel = new WordLabel(randomWord);
 
