@@ -13,7 +13,7 @@ public class GameFrame extends JFrame {
 		setResizable(false);
 		setJMenuBar(makeMenu());
 		add(makeToolBar(), BorderLayout.NORTH);
-		add(gamePanel);
+		add(gamePanel, BorderLayout.CENTER);
 		setVisible(true);
 		gamePanel.inputText.requestFocus();
 	}
