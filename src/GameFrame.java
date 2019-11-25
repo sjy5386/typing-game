@@ -3,8 +3,6 @@ import java.awt.*;
 
 public class GameFrame extends JFrame {
 	private GamePanel gamePanel = new GamePanel();
-	private	ScorePanel scorePanel = new ScorePanel();
-	private EditPanel editPanel = new EditPanel();
 
 	public GameFrame() {
 		super("타이핑 게임");
@@ -13,27 +11,9 @@ public class GameFrame extends JFrame {
 		setResizable(false);
 		setJMenuBar(makeMenu());
 		add(makeToolBar(), BorderLayout.NORTH);
-		splitPane();
+		add(gamePanel);
 		setVisible(true);
-	}
-	private void splitPane() {
-		JSplitPane hPane = new JSplitPane();
-		getContentPane().add(hPane, BorderLayout.CENTER);
-		
-		hPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);		
-		hPane.setDividerLocation(500);
-		hPane.setEnabled(false); // split bar를 움직일 수 없도록 하기 위해
-		hPane.setLeftComponent(gamePanel);
-		hPane.setDividerSize(5);
-		
-		JSplitPane pPane = new JSplitPane();
-		hPane.setRightComponent(pPane);
-		pPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		pPane.setDividerLocation(70);
-		pPane.setTopComponent(scorePanel);
-		pPane.setBottomComponent(editPanel);
-		pPane.setEnabled(false);
-		pPane.setDividerSize(5);
+		gamePanel.inputText.requestFocus();
 	}
 
 	private JMenuBar makeMenu() {
