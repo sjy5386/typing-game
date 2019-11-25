@@ -69,8 +69,4 @@ public class GameFrame extends JFrame {
 		toolBar.setFloatable(false);
 		return toolBar;
 	}
-
-	public GameFrame getRootFrame() {
-	    return this;
-    }
 }
