@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GameFrame extends JFrame {
 	private GamePanel gamePanel = new GamePanel();
@@ -28,10 +30,19 @@ public class GameFrame extends JFrame {
 		gameMenu.add(new JMenuItem("끝내기"));
 
 		JMenu wordMenu = new JMenu("단어");
-		wordMenu.add(new JMenuItem("단어 목록"));
-		wordMenu.addSeparator();
-		wordMenu.add(new JMenuItem("단어 파일 열기"));
-		wordMenu.add(new JMenuItem("단어 파일 저장"));
+		JMenuItem wordList = new JMenuItem("단어 목록");
+		wordList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog wordDialog = new JDialog(getRootFrame());
+                wordDialog.setTitle("단어");
+                wordDialog.setMinimumSize(new Dimension(400, 430));
+                wordDialog.setResizable(false);
+                wordDialog.add(new WordPanel());
+                wordDialog.setVisible(true);
+            }
+        });
+		wordMenu.add(wordList);
 
 		JMenu multiplayerMenu = new JMenu("멀티플레이 ");
 		multiplayerMenu.add(new JMenuItem("게임 생성"));
@@ -59,4 +70,8 @@ public class GameFrame extends JFrame {
 		toolBar.setFloatable(false);
 		return toolBar;
 	}
+
+	public GameFrame getRootFrame() {
+	    return this;
+    }
 }
