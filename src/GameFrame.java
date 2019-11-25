@@ -1,5 +1,5 @@
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 
 public class GameFrame extends JFrame {
 	private GamePanel gamePanel = new GamePanel();

@@ -1,5 +1,3 @@
-import java.awt.Color;
-
 import javax.swing.*;
 
 public class ScorePanel extends JPanel {
@@ -7,7 +5,7 @@ public class ScorePanel extends JPanel {
 	private JLabel score = new JLabel("0");
 	private JLabel nowLevel = new JLabel("현재 레벨");
 	public ScorePanel() {
-		setBackground(new Color(203, 174, 130));
+		setBackground(MyColor.DARK);
 		setLayout(null);
 		text.setSize(70, 30);
 		text.setLocation(10, 10);

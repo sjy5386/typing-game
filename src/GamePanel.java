@@ -1,7 +1,7 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
 
 public class GamePanel extends JPanel {
 	private JTextField inputText = new JTextField(40);
@@ -13,13 +13,13 @@ public class GamePanel extends JPanel {
 	
 	class JGameGroundPanel extends JPanel {
 		public JGameGroundPanel() {
-			setBackground(new Color(255, 255, 228));
+			setBackground(MyColor.LIGHT);
 			setLayout(null);
 		}
 	}
 	class JInputPanel extends JPanel {
 		public JInputPanel() {
-			setBackground(new Color(255, 255, 228));
+			setBackground(MyColor.LIGHT);
 			setLayout(new FlowLayout());
 			add(inputText);
 			inputText.addActionListener(new ActionListener() {

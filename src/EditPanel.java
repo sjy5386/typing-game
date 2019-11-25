@@ -1,14 +1,14 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
 
 public class EditPanel extends JPanel {
 	private JTextField addWord = new JTextField(20);
 	private JButton addButton = new JButton("추가");
 	private JButton saveButton = new JButton("저장");
 	public EditPanel() {
-		setBackground(new Color(255, 224,178));
+		setBackground(MyColor.BASE);
 		setLayout(new FlowLayout());
 		add(addWord);
 		addWord.addActionListener(new ActionListener() {

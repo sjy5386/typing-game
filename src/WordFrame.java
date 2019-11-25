@@ -14,11 +14,11 @@ public class WordFrame extends JFrame {
         setResizable(false);
         Container c = getContentPane();
         c.setLayout(new FlowLayout());
-        c.setBackground(new Color(255, 224, 178));
-        list.setBackground(new Color(255, 255, 228));
+        c.setBackground(MyColor.BASE);
+        list.setBackground(MyColor.LIGHT);
         scrollPane.setPreferredSize(new Dimension(350, 320));
-        textField.setBackground(new Color(255, 255, 228));
-        addButton.setBackground(new Color(203, 174, 130));
+        textField.setBackground(MyColor.LIGHT);
+        addButton.setBackground(MyColor.DARK);
         c.add(scrollPane);
         c.add(textField);
         c.add(addButton);
