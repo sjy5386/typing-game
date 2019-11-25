@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 public class GameFrame extends JFrame {
 	private GamePanel gamePanel = new GamePanel();
+	private WordDialog wordDialog = new WordDialog(this);
 
 	public GameFrame() {
 		super("타이핑 게임");
@@ -34,12 +35,10 @@ public class GameFrame extends JFrame {
 		wordList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog wordDialog = new JDialog(getRootFrame());
-                wordDialog.setTitle("단어");
-                wordDialog.setMinimumSize(new Dimension(400, 430));
-                wordDialog.setResizable(false);
-                wordDialog.add(new WordPanel());
-                wordDialog.setVisible(true);
+                if (wordDialog.isVisible())
+                    wordDialog.requestFocus();
+                else
+                    wordDialog.setVisible(true);
             }
         });
 		wordMenu.add(wordList);
