@@ -48,6 +48,9 @@ public class WordManager {
     }
 
     public void load() {
+        if (!Files.exists(Paths.get(filename)))
+            return;
+
         try {
             List<String> words = Files.readAllLines(Paths.get(filename), StandardCharsets.UTF_8);
             this.words.addAll(words);
