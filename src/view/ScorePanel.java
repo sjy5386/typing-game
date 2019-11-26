@@ -5,11 +5,9 @@ import java.awt.*;
 
 public class ScorePanel extends JPanel {
     private JLabel scoreTextLabel = new JLabel("점수: ");
-    private int score = 0;
-    private JLabel scoreLabel = new JLabel(String.valueOf(score));
+    private JLabel scoreLabel = new JLabel("0");
     private JLabel levelTextLabel = new JLabel("레벨: ");
-    private int level = 0;
-    private JLabel levelLabel = new JLabel(String.valueOf(level));
+    private JLabel levelLabel = new JLabel("0");
 
     public ScorePanel() {
         setBackground(MyColor.LIGHT);
@@ -20,13 +18,11 @@ public class ScorePanel extends JPanel {
         add(levelLabel);
     }
 
-    public void setScore(int length){
-        score = score + length;
+    public void setScore(int score) {
         scoreLabel.setText(String.valueOf(score));
     }
-    public void setLevel(){
-        level = score /100;
+
+    public void setLevel(int level) {
         levelLabel.setText(String.valueOf(level));
     }
-
 }

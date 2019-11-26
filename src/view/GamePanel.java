@@ -1,25 +1,23 @@
 package view;
 
-import model.WordManager;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
-	public JTextField inputText = new JTextField(60);
 	private ScorePanel scorePanel = new ScorePanel();
 	private JGameGroundPanel gameGroundPanel = new JGameGroundPanel();
 	private JInputPanel inputPanel = new JInputPanel();
-	private WordManager manager = new WordManager();
-	private String randomWord = manager.getRandomWord();
-	private WordLabel makeLabel = new WordLabel(randomWord);
 
 	public GamePanel() {
 		setLayout(new BorderLayout());
 		this.add(scorePanel, BorderLayout.NORTH);
 		this.add(gameGroundPanel, BorderLayout.CENTER);
 		this.add(inputPanel, BorderLayout.SOUTH);
-		createWord();
+	}
+
+	public void initFocus() {
+		inputPanel.inputText.setFocusable(true);
+		inputPanel.inputText.requestFocus();
 	}
 
 	class JGameGroundPanel extends JPanel {
@@ -29,31 +27,16 @@ public class GamePanel extends JPanel {
 		}
 	}
 
-	public void createWord(){
-		randomWord = manager.getRandomWord();
-		makeLabel = new WordLabel(randomWord);
-		gameGroundPanel.add(makeLabel);
-	}
-
-	public void removeWord(){
-		gameGroundPanel.remove(makeLabel);
-		gameGroundPanel.revalidate();
-		gameGroundPanel.repaint();
-	}
-
 	class JInputPanel extends JPanel {
+		private JTextField inputText = new JTextField(60);
+
 		public JInputPanel() {
 			setBackground(MyColor.LIGHT);
 			setLayout(new FlowLayout());
 			this.add(inputText);
 			inputText.addActionListener(e -> {
 				String myWord = inputText.getText();
-				if(myWord.equals(randomWord)){
-					removeWord();
-					scorePanel.setScore(randomWord.length());
-					createWord();
-				}
-				scorePanel.setLevel();
+				scorePanel.setLevel(1);
 				inputText.setText("");
 			});
 		}

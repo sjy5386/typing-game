@@ -18,7 +18,7 @@ public class GameFrame extends JFrame {
 		add(makeToolBar(), BorderLayout.NORTH);
 		add(gamePanel, BorderLayout.CENTER);
 		setVisible(true);
-		gamePanel.inputText.requestFocus();
+		gamePanel.initFocus();
 	}
 
 	private JMenuBar makeMenu() {
