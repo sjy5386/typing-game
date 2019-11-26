@@ -1,6 +1,6 @@
 package view;
 
-import controller.GameApp;
+import model.WordManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,12 +13,13 @@ public class WordPanel extends JPanel {
     private JButton removeButton = new JButton("삭제");
     private JButton loadButton = new JButton("열기");
     private JButton saveButton = new JButton("저장");
+    private WordManager wordManager = new WordManager();
 
     public WordPanel() {
         setLayout(new FlowLayout());
         setBackground(MyColor.BASE);
         list.setBackground(MyColor.LIGHT);
-        list.setListData(GameApp.wordManager.getAllWords());
+        list.setListData(wordManager.getAllWords());
         list.addListSelectionListener(e -> {
             JList<String> list = (JList<String>)e.getSource();
             textField.setText(list.getSelectedValue());
@@ -28,27 +29,27 @@ public class WordPanel extends JPanel {
         textField.addActionListener(e -> addButton.doClick());
         addButton.setBackground(MyColor.DARK);
         addButton.addActionListener(e -> {
-            GameApp.wordManager.add(textField.getText());
+            wordManager.add(textField.getText());
             textField.setText("");
-            list.setListData(GameApp.wordManager.getAllWords());
+            list.setListData(wordManager.getAllWords());
             textField.setFocusable(true);
             textField.requestFocus(true);
         });
         removeButton.setBackground(MyColor.DARK);
         removeButton.addActionListener(e -> {
-            GameApp.wordManager.remove(textField.getText());
+            wordManager.remove(textField.getText());
             textField.setText("");
-            list.setListData(GameApp.wordManager.getAllWords());
+            list.setListData(wordManager.getAllWords());
         });
         loadButton.setBackground(MyColor.DARK);
         loadButton.addActionListener(e -> {
-            GameApp.wordManager.load();
-            list.setListData(GameApp.wordManager.getAllWords());
+            if (wordManager.load())
+                list.setListData(wordManager.getAllWords());
         });
         saveButton.setBackground(MyColor.DARK);
         saveButton.addActionListener(e -> {
-            GameApp.wordManager.save();
-            JOptionPane.showMessageDialog(this, "저장되었습니다.");
+            if (wordManager.save())
+                JOptionPane.showMessageDialog(this, "저장되었습니다.");
         });
         add(scrollPane);
         add(textField);

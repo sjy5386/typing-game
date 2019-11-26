@@ -1,6 +1,5 @@
 package view;
 
-import controller.GameApp;
 import model.WordManager;
 
 import javax.swing.*;
@@ -11,7 +10,7 @@ public class GamePanel extends JPanel {
 	private ScorePanel scorePanel = new ScorePanel();
 	private JGameGroundPanel gameGroundPanel = new JGameGroundPanel();
 	private JInputPanel inputPanel = new JInputPanel();
-	private WordManager manager = GameApp.wordManager;
+	private WordManager manager = new WordManager();
 	private String randomWord = manager.getRandomWord();
 	private WordLabel makeLabel = new WordLabel(randomWord);
 

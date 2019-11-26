@@ -6,20 +6,21 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Vector;
+import java.util.*;
 
 public class WordManager {
-    private HashSet<String> words = new HashSet<>();
-    private final String filename = "res/words.txt";
+    private static HashSet<String> words = new HashSet<>();
+    private static final String filename = "res/words.txt";
 
     public WordManager() {
-        load();
+        if (words.size() == 0)
+            load();
     }
 
     public String getRandomWord() {
+        if (words.size() == 0)
+            return null;
+
         int r = new Random().nextInt(words.size());
         String word = (String)words.toArray()[r];
         return word;
@@ -28,6 +29,7 @@ public class WordManager {
     public Vector<String> getAllWords() {
         Vector<String> v = new Vector<>();
         v.addAll(words);
+        Collections.sort(v);
         return v;
     }
 
@@ -39,28 +41,34 @@ public class WordManager {
         words.remove(word);
     }
 
-    public void save() {
+    public boolean save() {
         try {
             FileWriter fout = new FileWriter(filename, StandardCharsets.UTF_8);
             BufferedWriter out = new BufferedWriter(fout);
             for (String line:words)
-                out.write(line + "\r\n");
+                out.write(line + "\n");
             out.close();
             fout.close();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void load() {
+    public boolean load() {
         if (!Files.exists(Paths.get(filename)))
-            return;
+            return false;
 
         try {
-            List<String> words = Files.readAllLines(Paths.get(filename), StandardCharsets.UTF_8);
-            this.words.addAll(words);
+            List<String> lines = Files.readAllLines(Paths.get(filename), StandardCharsets.UTF_8);
+            HashSet<String> hs = new HashSet<>();
+            hs.addAll(lines);
+            words = hs;
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }
