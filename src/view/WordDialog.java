@@ -8,7 +8,7 @@ public class WordDialog extends JDialog {
 
     public WordDialog(Frame owner) {
         super(owner, "단어", true);
-        setMinimumSize(new Dimension(400, 430));
+        setMinimumSize(new Dimension(400, 460));
         setResizable(false);
         setContentPane(wordPanel);
     }

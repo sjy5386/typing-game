@@ -33,6 +33,10 @@ public class WordManager {
         return v;
     }
 
+    public int getSize() {
+        return words.size();
+    }
+
     public void add(String word) {
         if (word == null)
             return;
