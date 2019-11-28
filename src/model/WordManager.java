@@ -34,11 +34,20 @@ public class WordManager {
     }
 
     public void add(String word) {
-        words.add(word);
+        if (word == null)
+            return;
+
+        String str = word.trim();
+        if (str.equals(""))
+            return;
+        words.add(str);
     }
 
     public void remove(String word) {
-        words.remove(word);
+        if (word == null)
+            return;
+
+        words.remove(word.trim());
     }
 
     public boolean save() {
