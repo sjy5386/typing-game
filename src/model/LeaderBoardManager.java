@@ -47,7 +47,7 @@ public class LeaderBoardManager {
     }
 
     public boolean load() {
-        if (Files.exists(Paths.get(filename)))
+        if (!Files.exists(Paths.get(filename)))
             return false;
 
         try {
