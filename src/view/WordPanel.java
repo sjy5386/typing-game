@@ -1,11 +1,14 @@
 package view;
 
-import model.WordManager;
+import controller.WordPanelListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Vector;
 
 public class WordPanel extends JPanel {
+    private WordPanelListener controller = new WordPanelListener(this);
+
     private JLabel sizeTextLabel = new JLabel("단어: ");
     private JLabel sizeLabel = new JLabel("0");
     private JList<String> list = new JList<>();
@@ -16,43 +19,25 @@ public class WordPanel extends JPanel {
     private JButton loadButton = new JButton("열기");
     private JButton saveButton = new JButton("저장");
 
-    private WordManager wordManager = new WordManager();
-
     public WordPanel() {
         setBackground(MyColor.BASE);
+
         list.setBackground(MyColor.LIGHT);
-        list.addListSelectionListener(e -> {
-            JList<String> list = (JList<String>)e.getSource();
-            textField.setText(list.getSelectedValue());
-        });
         scrollPane.setPreferredSize(new Dimension(350, 320));
         textField.setBackground(MyColor.LIGHT);
-        textField.addActionListener(e -> addButton.doClick());
         addButton.setBackground(MyColor.DARK);
-        addButton.addActionListener(e -> {
-            wordManager.add(textField.getText());
-            textField.setText("");
-            refresh();
-            textField.setFocusable(true);
-            textField.requestFocus(true);
-        });
         removeButton.setBackground(MyColor.DARK);
-        removeButton.addActionListener(e -> {
-            wordManager.remove(textField.getText());
-            textField.setText("");
-            refresh();
-        });
         loadButton.setBackground(MyColor.DARK);
-        loadButton.addActionListener(e -> {
-            if (wordManager.load())
-                refresh();
-        });
         saveButton.setBackground(MyColor.DARK);
-        saveButton.addActionListener(e -> {
-            if (wordManager.save())
-                JOptionPane.showMessageDialog(this, "저장되었습니다.");
-        });
-        refresh();
+
+        list.addListSelectionListener(controller);
+        textField.addActionListener(e -> addButton.doClick());
+        addButton.addActionListener(controller);
+        removeButton.addActionListener(controller);
+        loadButton.addActionListener(controller);
+        saveButton.addActionListener(controller);
+
+        loadButton.doClick();
 
         setLayout(new FlowLayout());
         add(sizeTextLabel);
@@ -66,8 +51,19 @@ public class WordPanel extends JPanel {
         setVisible(true);
     }
 
-    private void refresh() {
-        sizeLabel.setText(String.valueOf(wordManager.getSize()));
-        list.setListData(wordManager.getAllWords());
+    public String getText() {
+        return textField.getText();
+    }
+
+    public void setText(String text) {
+        textField.setText(text);
+    }
+
+    public void setSize(int size) {
+        sizeLabel.setText(String.valueOf(size));
+    }
+
+    public void setListData(Vector<String> listData) {
+        list.setListData(listData);
     }
 }
