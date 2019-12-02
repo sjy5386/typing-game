@@ -54,8 +54,8 @@ public class LeaderBoardManager {
             List<String> lines = Files.readAllLines(Paths.get(filename), StandardCharsets.UTF_8);
             Vector<Player> v = new Vector<>();
             for (String line:lines) {
-                String name = line.split("|")[0].trim();
-                int score = Integer.parseInt(line.split("|")[1]);
+                String name = line.split("\\|")[0].trim();
+                int score = Integer.parseInt(line.split("\\|")[1]);
                 v.add(new Player(name, score));
             }
             Collections.sort(v);

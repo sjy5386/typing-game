@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 public class GameFrameListener implements ActionListener {
     private GameFrame view;
-
     public GameFrameListener(GameFrame view) {
         this.view = view;
     }
@@ -20,6 +19,10 @@ public class GameFrameListener implements ActionListener {
     }
 
     private void onLeaderBoardMenuItemClicked() {
+        if (!view.getLeaderBoardDialog().isVisible())
+            view.getLeaderBoardDialog().setVisible(true);
+        else
+            view.getLeaderBoardDialog().requestFocus();
     }
 
     private void onExitMenuItemClicked() {

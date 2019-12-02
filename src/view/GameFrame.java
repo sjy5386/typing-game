@@ -12,6 +12,7 @@ public class GameFrame extends JFrame {
 	private JToolBar toolBar = makeToolBar();
 	private GamePanel gamePanel = new GamePanel();
 	private WordDialog wordDialog = new WordDialog(this);
+	private LeaderBoardDialog leaderBoardDialog = new LeaderBoardDialog(this);
 
 	public GameFrame() {
 		super("타이핑 게임");
@@ -126,5 +127,8 @@ public class GameFrame extends JFrame {
 
 	public WordDialog getWordDialog() {
 		return wordDialog;
+	}
+	public LeaderBoardDialog getLeaderBoardDialog(){
+		return leaderBoardDialog;
 	}
 }
