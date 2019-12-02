@@ -8,11 +8,21 @@ import java.awt.event.ActionListener;
 
 public class GameFrameListener implements ActionListener {
     private GameFrame view;
+    private Game game;
+
     public GameFrameListener(GameFrame view) {
         this.view = view;
     }
 
     private void onNewGameMenuItemClicked() {
+        if (game != null) {
+            JOptionPane.showMessageDialog(view, "게임이 이미 진행 중입니다.", view.getTitle(), 0);
+            return;
+        }
+        game = new Game(view.getGamePanel());
+        view.getGamePanel().getInputPanel().getInputText().addActionListener(game);
+        Thread th = new Thread(game);
+        th.start();
     }
 
     private void onNewGameBrainMenuItemClicked() {
