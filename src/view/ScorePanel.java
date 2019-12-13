@@ -8,6 +8,8 @@ public class ScorePanel extends JPanel {
     private JLabel scoreLabel = new JLabel("0");
     private JLabel levelTextLabel = new JLabel("레벨: ");
     private JLabel levelLabel = new JLabel("0");
+    private JLabel lifeTextLabel = new JLabel("목숨: ");
+    private JLabel lifeLabel = new JLabel("0");
 
     public ScorePanel() {
         setBackground(MyColor.LIGHT);
@@ -16,6 +18,8 @@ public class ScorePanel extends JPanel {
         add(scoreLabel);
         add(levelTextLabel);
         add(levelLabel);
+        add(lifeTextLabel);
+        add(lifeLabel);
     }
 
     public void setScore(int score) {
@@ -24,5 +28,9 @@ public class ScorePanel extends JPanel {
 
     public void setLevel(int level) {
         levelLabel.setText(String.valueOf(level));
+    }
+
+    public void setLife(int life) {
+        lifeLabel.setText(String.valueOf(life));
     }
 }

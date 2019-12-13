@@ -15,6 +15,8 @@ public class WordLabel extends JLabel implements Runnable {
     private static final int DELTA = 1;
     private static final int INTERVAL = 200;
 
+    private boolean hit = false;
+
     public WordLabel(String text) {
         super(text);
         setFont(new Font(MyFont.DEFAULT.getFontName(), Font.BOLD, MIN_FONT_SIZE));
@@ -27,9 +29,19 @@ public class WordLabel extends JLabel implements Runnable {
         setLocation(x, y);
     }
 
+    public boolean isHit() {
+        return hit;
+    }
+
+    public void setHit(boolean hit) {
+        this.hit = hit;
+    }
+
     @Override
     public void run() {
         try {
+            if (hit)
+                return;
             if (!isVisible())
                 setVisible(true);
             boolean peak = false;

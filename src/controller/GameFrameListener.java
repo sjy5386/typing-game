@@ -16,8 +16,11 @@ public class GameFrameListener implements ActionListener {
 
     private void onNewGameMenuItemClicked() {
         if (game != null) {
-            JOptionPane.showMessageDialog(view, "게임이 이미 진행 중입니다.", view.getTitle(), 0);
-            return;
+            if (JOptionPane.showConfirmDialog(view, "게임이 이미 진행 중입니다.\n새 게임을 시작할까요?", view.getTitle(), 2) == 1)
+                return;
+            if (game.getFlag())
+                game.setFlag(false);
+            game = null;
         }
         game = new Game(view.getGamePanel());
         view.getGamePanel().getInputPanel().getInputText().addActionListener(game);
