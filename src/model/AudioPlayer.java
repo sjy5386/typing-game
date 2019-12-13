@@ -86,4 +86,9 @@ public class AudioPlayer {
 
         clip.loop(count);
     }
+
+    public void setVolume(int volume) {
+        FloatControl floatControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        floatControl.setValue(20f * (float) Math.log10((float) volume / 100));
+    }
 }

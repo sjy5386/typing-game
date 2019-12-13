@@ -48,7 +48,10 @@ public class Game implements ActionListener, Runnable {
     }
 
     private void playSoundEffect(String audio) {
+        if (!Settings.isSoundEffectEnabled())
+            return;
         AudioPlayer audioPlayer = new AudioPlayer(audio);
+        audioPlayer.setVolume(Settings.getSoundEffectVolume());
         audioPlayer.play();
     }
 
@@ -130,21 +133,21 @@ public class Game implements ActionListener, Runnable {
 
     @Override
     public void run() {
-        try {
-            while (true) {
-                if (!flag)
-                    break;
-                if (wordLabels.size() < level + 2)
-                    addWordLabel();
-                gc();
-                if (life <= 0) {
-                    gameOver();
-                    break;
-                }
-                Thread.sleep(1000);
+        while (true) {
+            if (!flag)
+                break;
+            if (wordLabels.size() < level + 2)
+                addWordLabel();
+            gc();
+            if (life <= 0) {
+                gameOver();
+                break;
             }
-        } catch (InterruptedException e) {
-            return;
+            if (Settings.isBackgroundMusicEnabled() && !bgmPlayer.isPlaying())
+                bgmPlayer.play();
+            else if (!Settings.isBackgroundMusicEnabled() && bgmPlayer.isPlaying())
+                bgmPlayer.pause();
+            bgmPlayer.setVolume(Settings.getBackgroundMusicVolume());
         }
         stop();
     }
