@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 public class GameFrameListener implements ActionListener {
     private GameFrame view;
     private Game game;
+    private BrainGame brainGame;
 
     public GameFrameListener(GameFrame view) {
         this.view = view;
@@ -29,6 +30,17 @@ public class GameFrameListener implements ActionListener {
     }
 
     private void onNewGameBrainMenuItemClicked() {
+        if (brainGame != null) {
+            if (JOptionPane.showConfirmDialog(view, "게임이 이미 진행 중입니다.\n새 게임을 시작할까요?", view.getTitle(), 2) == 1)
+                return;
+            if (brainGame.getFlag())
+                brainGame.setFlag(false);
+            brainGame = null;
+        }
+        brainGame = new BrainGame(view.getGamePanel());
+        view.getGamePanel().getInputPanel().getInputText().addActionListener(brainGame);
+        Thread th = new Thread(brainGame);
+        th.start();
     }
 
     private void onLeaderBoardMenuItemClicked() {
