@@ -23,6 +23,10 @@ public class GameFrameListener implements ActionListener {
                 game.setFlag(false);
             game = null;
         }
+        else if(brainGame != null){
+            if (JOptionPane.showConfirmDialog(view, "게임이 이미 진행 중입니다.\n새 게임을 시작할까요?", view.getTitle(), 2) == 1)
+                return;
+        }
         game = new Game(view.getGamePanel());
         view.getGamePanel().getInputPanel().getInputText().addActionListener(game);
         Thread th = new Thread(game);
@@ -36,6 +40,10 @@ public class GameFrameListener implements ActionListener {
             if (brainGame.getFlag())
                 brainGame.setFlag(false);
             brainGame = null;
+        }
+        else if(game != null){
+            if (JOptionPane.showConfirmDialog(view, "게임이 이미 진행 중입니다.\n새 게임을 시작할까요?", view.getTitle(), 2) == 1)
+                return;
         }
         brainGame = new BrainGame(view.getGamePanel());
         view.getGamePanel().getInputPanel().getInputText().addActionListener(brainGame);
