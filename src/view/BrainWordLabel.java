@@ -1,40 +1,12 @@
 package view;
 
-import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
 
-public class WordLabel extends JLabel implements Runnable {
-    protected static final int MIN_X = 0;
-    protected static final int MAX_X = 800;
-    private static final int MIN_Y = 0;
-    private static final int MAX_Y = 400;
+public class BrainWordLabel extends WordLabel {
+    private static final int INTERVAL = 250;
 
-    protected static final int MIN_FONT_SIZE = 0;
-    protected static final int MAX_FONT_SIZE = 32;
-    protected static final int DELTA = 1;
-    private static final int INTERVAL = 200;
-
-    protected boolean hit = false;
-
-    public WordLabel(String text) {
+    public BrainWordLabel(String text) {
         super(text);
-        setFont(new Font(MyFont.DEFAULT.getFontName(), Font.BOLD, MIN_FONT_SIZE));
-        int width = MAX_FONT_SIZE * text.length();
-        int height = MAX_FONT_SIZE * 2;
-        setSize(width, height);
-        Random random = new Random();
-        int x = random.nextInt(MAX_X + 1 - MIN_X - width) + MIN_X;
-        int y = random.nextInt(MAX_Y + 1 - MIN_Y - height) + MIN_Y;
-        setLocation(x, y);
-    }
-
-    public boolean isHit() {
-        return hit;
-    }
-
-    public void setHit(boolean hit) {
-        this.hit = hit;
     }
 
     @Override
@@ -52,17 +24,24 @@ public class WordLabel extends JLabel implements Runnable {
                 int fontSize = font.getSize();
                 int x = getX();
                 int y = getY();
-
                 if (!peak) { // increase
                     fontSize += DELTA;
                     x -= DELTA * 2;
                     if (x < MIN_X)
                         x = MIN_X;
+                    if(fontSize == 22)
+                        setForeground(new Color(0x00000000, true));
+                    else if(fontSize == 28)
+                        setForeground(new Color(0xFF000000, true));
                 } else { // decrease
                     fontSize -= DELTA;
                     x += DELTA * 2;
                     if (x > MAX_X - MIN_X - getWidth())
                         x = MAX_X - MIN_X - getWidth();
+                    if(fontSize == 25)
+                        setForeground(new Color(0x00000000, true));
+                    else if(fontSize == 20)
+                        setForeground(new Color(0xFF000000, true));
                 }
                 setFont(new Font(fontName, fontStyle, fontSize));
                 setLocation(x, y);

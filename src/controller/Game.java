@@ -15,16 +15,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Game implements ActionListener, Runnable {
-    private GamePanel view;
-    private WordManager wordManager = new WordManager();
+    protected GamePanel view;
+    protected WordManager wordManager = new WordManager();
     private List<WordLabel> wordLabels = Collections.synchronizedList(new LinkedList<>());
     private AudioPlayer bgmPlayer = new AudioPlayer();
     private LeaderBoardManager leaderBoardManager = new LeaderBoardManager();
-    private int score = 0;
-    private int level = 1;
-    private int life = 5;
+    protected int score = 0;
+    protected int level = 1;
+    protected int life = 5;
 
-    private boolean flag = true;
+    protected boolean flag = true;
 
     public Game(GamePanel view) {
         this.view = view;
@@ -39,7 +39,7 @@ public class Game implements ActionListener, Runnable {
         bgmPlayer.play();
     }
 
-    private void addWordLabel() {
+    protected void addWordLabel() {
         WordLabel wordLabel = new WordLabel(wordManager.getRandomWord());
         wordLabels.add(wordLabel);
         view.getGameGroundPanel().add(wordLabel);
@@ -47,7 +47,7 @@ public class Game implements ActionListener, Runnable {
         th.start();
     }
 
-    private void playSoundEffect(String audio) {
+    protected void playSoundEffect(String audio) {
         if (!Settings.isSoundEffectEnabled())
             return;
         AudioPlayer audioPlayer = new AudioPlayer(audio);
@@ -55,7 +55,7 @@ public class Game implements ActionListener, Runnable {
         audioPlayer.play();
     }
 
-    private WordLabel searchTarget(String word) {
+    protected WordLabel searchTarget(String word) {
         Iterator<WordLabel> it = wordLabels.iterator();
         while (it.hasNext()) {
             WordLabel w = it.next();
@@ -65,7 +65,7 @@ public class Game implements ActionListener, Runnable {
         return null;
     }
 
-    private void hit(WordLabel target) {
+    protected void hit(WordLabel target) {
         String word = target.getText();
         target.setHit(true);
         target.setVisible(false);
@@ -84,12 +84,12 @@ public class Game implements ActionListener, Runnable {
         view.getGameGroundPanel().repaint();
     }
 
-    public void stop() {
+    protected void stop() {
         bgmPlayer.stop();
         life = 0;
     }
 
-    private void gameOver() {
+    protected void gameOver() {
         String name = JOptionPane.showInputDialog(view, "이름을 입력하세요.", "Game Over!", 3);
         Player player = new Player(name);
         leaderBoardManager.add(player);
@@ -103,7 +103,7 @@ public class Game implements ActionListener, Runnable {
         this.flag = flag;
     }
 
-    private synchronized void gc() { // Garbage Collection
+    protected synchronized void gc() { // Garbage Collection
         wordLabels.removeIf(item -> !item.isVisible());
         Component[] components = view.getGameGroundPanel().getComponents();
         for (Component c : components) {
