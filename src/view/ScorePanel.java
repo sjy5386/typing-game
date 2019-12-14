@@ -23,7 +23,7 @@ public class ScorePanel extends JPanel {
     }
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(scoreImage.getImage(), 0, 0, null);
     }

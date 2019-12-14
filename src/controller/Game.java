@@ -17,12 +17,12 @@ import java.util.List;
 public class Game implements ActionListener, Runnable {
     protected GamePanel view;
     protected WordManager wordManager = new WordManager();
-    private List<WordLabel> wordLabels = Collections.synchronizedList(new LinkedList<>());
+    protected List<WordLabel> wordLabels = Collections.synchronizedList(new LinkedList<>());
     private AudioPlayer bgmPlayer = new AudioPlayer();
     private LeaderBoardManager leaderBoardManager = new LeaderBoardManager();
-    protected int score = 0;
-    protected int level = 1;
-    protected int life = 5;
+    private int score = 0;
+    private int level = 1;
+    private int life = 5;
 
     protected boolean flag = true;
 
@@ -47,7 +47,7 @@ public class Game implements ActionListener, Runnable {
         th.start();
     }
 
-    protected void playSoundEffect(String audio) {
+    private void playSoundEffect(String audio) {
         if (!Settings.isSoundEffectEnabled())
             return;
         AudioPlayer audioPlayer = new AudioPlayer(audio);
@@ -55,7 +55,7 @@ public class Game implements ActionListener, Runnable {
         audioPlayer.play();
     }
 
-    protected WordLabel searchTarget(String word) {
+    private WordLabel searchTarget(String word) {
         Iterator<WordLabel> it = wordLabels.iterator();
         while (it.hasNext()) {
             WordLabel w = it.next();
@@ -65,34 +65,48 @@ public class Game implements ActionListener, Runnable {
         return null;
     }
 
-    protected void hit(WordLabel target) {
+    private void hit(WordLabel target) {
         String word = target.getText();
         target.setHit(true);
         target.setVisible(false);
         wordLabels.remove(target);
         playSoundEffect(MyAudio.SHOT);
-        score += word.length();
-        int prevLevel = level;
-        level = score / 100 + 1;
-        if (prevLevel < level) {
-            life = 5;
-            view.getScorePanel().setLife(life);
-        }
-        view.getScorePanel().setScore(score);
-        view.getScorePanel().setLevel(level);
+        setScore(score + word.length());
         view.getGameGroundPanel().revalidate();
         view.getGameGroundPanel().repaint();
     }
 
-    protected void stop() {
+    private void setScore(int score) {
+        this.score = score;
+        view.getScorePanel().setScore(score);
+        setLevel(score / 100 + 1);
+    }
+
+    private void setLevel(int level) {
+        int prevLevel = this.level;
+        this.level = level;
+        view.getScorePanel().setLevel(level);
+        if (prevLevel < level)
+            setLife(5);
+    }
+
+    private void setLife(int life) {
+        this.life = life;
+        view.getScorePanel().setLife(life);
+    }
+
+    public void stop() {
+        flag = false;
         bgmPlayer.stop();
         life = 0;
     }
 
-    protected void gameOver() {
+    private void gameOver() {
         String name = JOptionPane.showInputDialog(view, "이름을 입력하세요.", "Game Over!", 3);
-        Player player = new Player(name);
-        leaderBoardManager.add(player);
+        if (name != null) {
+            Player player = new Player(name, score);
+            leaderBoardManager.add(player);
+        }
     }
 
     public boolean getFlag() {
@@ -103,7 +117,7 @@ public class Game implements ActionListener, Runnable {
         this.flag = flag;
     }
 
-    protected synchronized void gc() { // Garbage Collection
+    private void gc() { // Garbage Collection
         wordLabels.removeIf(item -> !item.isVisible());
         Component[] components = view.getGameGroundPanel().getComponents();
         for (Component c : components) {
@@ -111,10 +125,8 @@ public class Game implements ActionListener, Runnable {
                 WordLabel w = (WordLabel) c;
                 if (!w.isVisible()) {
                     view.getGameGroundPanel().remove(w);
-                    if (!w.isHit()) {
-                        life--;
-                        view.getScorePanel().setLife(life);
-                    }
+                    if (!w.isHit())
+                        setLife(life - 1);
                 }
             }
         }
@@ -133,13 +145,12 @@ public class Game implements ActionListener, Runnable {
 
     @Override
     public void run() {
-        while (true) {
-            if (!flag)
-                break;
+        while (flag) {
             if (wordLabels.size() < level + 2)
                 addWordLabel();
             gc();
             if (life <= 0) {
+                setLife(0);
                 gameOver();
                 break;
             }

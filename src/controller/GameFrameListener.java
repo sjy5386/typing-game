@@ -15,20 +15,24 @@ public class GameFrameListener implements ActionListener {
         this.view = view;
     }
 
+    private boolean isGameRunning() {
+        return game != null || brainGame != null;
+    }
+
+    private void stopGame() {
+        if (game != null && game.getFlag())
+            game.stop();
+        if (brainGame != null && brainGame.getFlag())
+            brainGame.stop();
+        game = null;
+        brainGame = null;
+    }
+
     private void onNewGameMenuItemClicked() {
-        if (game != null) {
-            if (JOptionPane.showConfirmDialog(view, "게임이 이미 진행 중입니다.\n새 게임을 시작할까요?", view.getTitle(), 2) == 1)
+        if (isGameRunning()) {
+            if (JOptionPane.showConfirmDialog(view, "게임이 이미 진행 중입니다.\n새 게임을 시작할까요?", view.getTitle(), 2) == 2)
                 return;
-            if (game.getFlag())
-                game.setFlag(false);
-            game = null;
-        }
-        else if(brainGame != null){
-            if (JOptionPane.showConfirmDialog(view, "게임이 이미 진행 중입니다.\n새 게임을 시작할까요?", view.getTitle(), 2) == 1)
-                return;
-            if (brainGame.getFlag())
-                brainGame.setFlag(false);
-            brainGame = null;
+            stopGame();
         }
         game = new Game(view.getGamePanel());
         view.getGamePanel().getInputPanel().getInputText().addActionListener(game);
@@ -37,19 +41,10 @@ public class GameFrameListener implements ActionListener {
     }
 
     private void onNewGameBrainMenuItemClicked() {
-        if (brainGame != null) {
-            if (JOptionPane.showConfirmDialog(view, "게임이 이미 진행 중입니다.\n새 게임을 시작할까요?", view.getTitle(), 2) == 1)
+        if (isGameRunning()) {
+            if (JOptionPane.showConfirmDialog(view, "게임이 이미 진행 중입니다.\n새 게임을 시작할까요?", view.getTitle(), 2) == 2)
                 return;
-            if (brainGame.getFlag())
-                brainGame.setFlag(false);
-            brainGame = null;
-        }
-        else if(game != null){
-            if (JOptionPane.showConfirmDialog(view, "게임이 이미 진행 중입니다.\n새 게임을 시작할까요?", view.getTitle(), 2) == 1)
-                return;
-            if (game.getFlag())
-                game.setFlag(false);
-            game = null;
+            stopGame();
         }
         brainGame = new BrainGame(view.getGamePanel());
         view.getGamePanel().getInputPanel().getInputText().addActionListener(brainGame);
