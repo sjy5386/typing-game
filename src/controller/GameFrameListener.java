@@ -85,6 +85,13 @@ public class GameFrameListener implements ActionListener {
     private void onExitGameMenuItemClicked() {
     }
 
+    private void onSoundSettingsMenuItemClicked() {
+        if (!view.getAudioDialog().isVisible())
+            view.getAudioDialog().setVisible(true);
+        else
+            view.getAudioDialog().requestFocus();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
@@ -111,6 +118,9 @@ public class GameFrameListener implements ActionListener {
                 break;
             case "게임 나가기":
                 onExitGameMenuItemClicked();
+                break;
+            case "소리 설정":
+                onSoundSettingsMenuItemClicked();
                 break;
         }
     }

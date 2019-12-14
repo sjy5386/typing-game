@@ -13,6 +13,7 @@ public class GameFrame extends JFrame {
     private GamePanel gamePanel = new GamePanel();
     private WordDialog wordDialog = new WordDialog(this);
     private LeaderBoardDialog leaderBoardDialog = new LeaderBoardDialog(this);
+    private AudioDialog audioDialog = new AudioDialog(this);
 
     public GameFrame() {
         super("타이핑 게임");
@@ -84,9 +85,19 @@ public class GameFrame extends JFrame {
         multiplayerMenu.addSeparator();
         multiplayerMenu.add(exitGameMenuItem);
 
+        JMenu settingsMenu = new JMenu("설정");
+        JMenuItem soundSettings = new JMenuItem("소리 설정");
+
+        soundSettings.setBackground(MyColor.DARK);
+
+        soundSettings.addActionListener(controller);
+
+        settingsMenu.add(soundSettings);
+
         menuBar.add(gameMenu);
         menuBar.add(wordMenu);
         menuBar.add(multiplayerMenu);
+        menuBar.add(settingsMenu);
         return menuBar;
     }
 
@@ -135,5 +146,9 @@ public class GameFrame extends JFrame {
 
     public LeaderBoardDialog getLeaderBoardDialog() {
         return leaderBoardDialog;
+    }
+
+    public AudioDialog getAudioDialog() {
+        return audioDialog;
     }
 }
