@@ -26,6 +26,9 @@ public class GameFrameListener implements ActionListener {
         else if(brainGame != null){
             if (JOptionPane.showConfirmDialog(view, "게임이 이미 진행 중입니다.\n새 게임을 시작할까요?", view.getTitle(), 2) == 1)
                 return;
+            if (brainGame.getFlag())
+                brainGame.setFlag(false);
+            brainGame = null;
         }
         game = new Game(view.getGamePanel());
         view.getGamePanel().getInputPanel().getInputText().addActionListener(game);
@@ -44,6 +47,9 @@ public class GameFrameListener implements ActionListener {
         else if(game != null){
             if (JOptionPane.showConfirmDialog(view, "게임이 이미 진행 중입니다.\n새 게임을 시작할까요?", view.getTitle(), 2) == 1)
                 return;
+            if (game.getFlag())
+                game.setFlag(false);
+            game = null;
         }
         brainGame = new BrainGame(view.getGamePanel());
         view.getGamePanel().getInputPanel().getInputText().addActionListener(brainGame);
