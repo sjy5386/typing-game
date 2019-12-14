@@ -8,8 +8,10 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-public class AudioPanelListener implements ActionListener, ChangeListener {
+public class AudioPanelListener implements ActionListener, ChangeListener, ItemListener {
     AudioPanel view;
 
     public AudioPanelListener(AudioPanel view) {
@@ -20,16 +22,20 @@ public class AudioPanelListener implements ActionListener, ChangeListener {
         view.getBackgroundSlider().setValue(Settings.getBackgroundMusicVolume());
     }
 
-    private void onEffectCheckBoxClicked() {
-        Settings.setSoundEffectEnabled(view.getEffectCheckBox().isSelected());
+    private void onEffectCheckBoxItemStateChanged() {
+        boolean selected = view.getEffectCheckBox().isSelected();
+        Settings.setSoundEffectEnabled(selected);
+        view.getEffectSlider().setEnabled(selected);
     }
 
     private void onEffectSliderChanged() {
         Settings.setSoundEffectVolume(view.getEffectSlider().getValue());
     }
 
-    private void onBackgroundCheckBoxClicked() {
-        Settings.setBackgroundMusicEnabled(view.getBackgroundCheckBox().isSelected());
+    private void onBackgroundCheckBoxItemStateChanged() {
+        boolean selected = view.getBackgroundCheckBox().isSelected();
+        Settings.setBackgroundMusicEnabled(selected);
+        view.getBackgroundSlider().setEnabled(selected);
     }
 
     private void onBackgroundSliderChanged() {
@@ -43,17 +49,19 @@ public class AudioPanelListener implements ActionListener, ChangeListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case "효과음":
-                onEffectCheckBoxClicked();
-                break;
-            case "배경음":
-                onBackgroundCheckBoxClicked();
-                ;
-                break;
             case "확인":
                 onOkButtonClicked();
                 break;
         }
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        JCheckBox checkBox = (JCheckBox) e.getSource();
+        if (checkBox == view.getEffectCheckBox())
+            onEffectCheckBoxItemStateChanged();
+        else if (checkBox == view.getBackgroundCheckBox())
+            onBackgroundCheckBoxItemStateChanged();
     }
 
     @Override
