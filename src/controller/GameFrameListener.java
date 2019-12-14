@@ -30,7 +30,6 @@ public class GameFrameListener implements ActionListener {
                 brainGame.setFlag(false);
             brainGame = null;
         }
-
         game = new Game(view.getGamePanel());
         view.getGamePanel().getInputPanel().getInputText().addActionListener(game);
         Thread th = new Thread(game);
@@ -52,7 +51,6 @@ public class GameFrameListener implements ActionListener {
                 game.setFlag(false);
             game = null;
         }
-
         brainGame = new BrainGame(view.getGamePanel());
         view.getGamePanel().getInputPanel().getInputText().addActionListener(brainGame);
         Thread th = new Thread(brainGame);
