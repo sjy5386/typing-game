@@ -12,7 +12,8 @@ public class GameFrame extends JFrame {
     private JToolBar toolBar = makeToolBar();
     private GamePanel gamePanel = new GamePanel();
     private WordDialog wordDialog = new WordDialog(this);
-    private LeaderBoardDialog leaderBoardDialog = new LeaderBoardDialog(this);
+    private LeaderBoardDialog leaderBoardDialog;
+    private AudioDialog audioDialog = new AudioDialog(this);
 
     public GameFrame() {
         super("타이핑 게임");
@@ -84,9 +85,19 @@ public class GameFrame extends JFrame {
         multiplayerMenu.addSeparator();
         multiplayerMenu.add(exitGameMenuItem);
 
+        JMenu settingsMenu = new JMenu("설정");
+        JMenuItem soundSettings = new JMenuItem("소리 설정");
+
+        soundSettings.setBackground(MyColor.DARK);
+
+        soundSettings.addActionListener(controller);
+
+        settingsMenu.add(soundSettings);
+
         menuBar.add(gameMenu);
         menuBar.add(wordMenu);
         menuBar.add(multiplayerMenu);
+        menuBar.add(settingsMenu);
         return menuBar;
     }
 
@@ -100,11 +111,11 @@ public class GameFrame extends JFrame {
         JButton createGameButton = new JButton("게임 생성");
         JButton joinGameButton = new JButton("게임 참가");
 
-        newGameButton.setBackground(MyColor.BASE);
-        newGameBrainButton.setBackground(MyColor.BASE);
-        leaderBoardButton.setBackground(MyColor.BASE);
-        createGameButton.setBackground(MyColor.BASE);
-        joinGameButton.setBackground(MyColor.BASE);
+        newGameButton.setBackground(MyColor.LIGHT);
+        newGameBrainButton.setBackground(MyColor.LIGHT);
+        leaderBoardButton.setBackground(MyColor.LIGHT);
+        createGameButton.setBackground(MyColor.LIGHT);
+        joinGameButton.setBackground(MyColor.LIGHT);
 
         newGameButton.addActionListener(controller);
         newGameBrainButton.addActionListener(controller);
@@ -134,6 +145,11 @@ public class GameFrame extends JFrame {
     }
 
     public LeaderBoardDialog getLeaderBoardDialog() {
+        leaderBoardDialog = new LeaderBoardDialog(this);
         return leaderBoardDialog;
+    }
+
+    public AudioDialog getAudioDialog() {
+        return audioDialog;
     }
 }

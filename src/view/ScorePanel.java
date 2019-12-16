@@ -10,9 +10,11 @@ public class ScorePanel extends JPanel {
     private JLabel levelLabel = new JLabel("0");
     private JLabel lifeTextLabel = new JLabel("목숨: ");
     private JLabel lifeLabel = new JLabel("0");
+    private JLabel timeTextLabel = new JLabel("시간: ");
+    private JLabel timeLabel = new JLabel("0");
+    private ImageIcon scoreImage = new ImageIcon("res/hot_balloon_score.jpg");
 
     public ScorePanel() {
-        setBackground(MyColor.LIGHT);
         setLayout(new FlowLayout());
         add(scoreTextLabel);
         add(scoreLabel);
@@ -20,6 +22,14 @@ public class ScorePanel extends JPanel {
         add(levelLabel);
         add(lifeTextLabel);
         add(lifeLabel);
+        add(timeTextLabel);
+        add(timeLabel);
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(scoreImage.getImage(), 0, 0, null);
     }
 
     public void setScore(int score) {
@@ -32,5 +42,9 @@ public class ScorePanel extends JPanel {
 
     public void setLife(int life) {
         lifeLabel.setText(String.valueOf(life));
+    }
+
+    public void setTime(float time) {
+        timeLabel.setText(String.valueOf(time));
     }
 }
