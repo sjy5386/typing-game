@@ -71,15 +71,6 @@ public class GameFrameListener implements ActionListener {
             view.getWordDialog().requestFocus();
     }
 
-    private void onCreateGameMenuItemClicked() {
-    }
-
-    private void onJoinGameMenuItemClicked() {
-    }
-
-    private void onExitGameMenuItemClicked() {
-    }
-
     private void onSoundSettingsMenuItemClicked() {
         if (!view.getAudioDialog().isVisible())
             view.getAudioDialog().setVisible(true);
@@ -104,15 +95,6 @@ public class GameFrameListener implements ActionListener {
                 break;
             case "단어 목록":
                 onWordListMenuItemClicked();
-                break;
-            case "게임 생성":
-                onCreateGameMenuItemClicked();
-                break;
-            case "게임 참가":
-                onJoinGameMenuItemClicked();
-                break;
-            case "게임 나가기":
-                onExitGameMenuItemClicked();
                 break;
             case "소리 설정":
                 onSoundSettingsMenuItemClicked();

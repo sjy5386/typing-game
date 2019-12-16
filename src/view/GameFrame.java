@@ -67,24 +67,6 @@ public class GameFrame extends JFrame {
 
         wordMenu.add(wordListMenuItem);
 
-        JMenu multiplayerMenu = new JMenu("멀티플레이 ");
-        JMenuItem createGameMenuItem = new JMenuItem("게임 생성");
-        JMenuItem joinGameMenuItem = new JMenuItem("게임 참가");
-        JMenuItem exitGameMenuItem = new JMenuItem("게임 나가기");
-
-        createGameMenuItem.setBackground(MyColor.DARK);
-        joinGameMenuItem.setBackground(MyColor.DARK);
-        exitGameMenuItem.setBackground(MyColor.DARK);
-
-        createGameMenuItem.addActionListener(controller);
-        joinGameMenuItem.addActionListener(controller);
-        exitGameMenuItem.addActionListener(controller);
-
-        multiplayerMenu.add(createGameMenuItem);
-        multiplayerMenu.add(joinGameMenuItem);
-        multiplayerMenu.addSeparator();
-        multiplayerMenu.add(exitGameMenuItem);
-
         JMenu settingsMenu = new JMenu("설정");
         JMenuItem soundSettings = new JMenuItem("소리 설정");
 
@@ -96,7 +78,6 @@ public class GameFrame extends JFrame {
 
         menuBar.add(gameMenu);
         menuBar.add(wordMenu);
-        menuBar.add(multiplayerMenu);
         menuBar.add(settingsMenu);
         return menuBar;
     }
@@ -108,30 +89,21 @@ public class GameFrame extends JFrame {
         JButton newGameButton = new JButton("새 클래식 게임");
         JButton newGameBrainButton = new JButton("새 브레인 게임");
         JButton leaderBoardButton = new JButton("리더보드");
-        JButton createGameButton = new JButton("게임 생성");
-        JButton joinGameButton = new JButton("게임 참가");
 
         newGameButton.setBackground(MyColor.LIGHT);
         newGameBrainButton.setBackground(MyColor.LIGHT);
         leaderBoardButton.setBackground(MyColor.LIGHT);
-        createGameButton.setBackground(MyColor.LIGHT);
-        joinGameButton.setBackground(MyColor.LIGHT);
 
         newGameButton.addActionListener(controller);
         newGameBrainButton.addActionListener(controller);
         leaderBoardButton.addActionListener(controller);
-        createGameButton.addActionListener(controller);
-        joinGameButton.addActionListener(controller);
 
-        toolBar.add(new JLabel("싱글플레이 "));
+        toolBar.add(new JLabel(" 게임 시작 "));
         toolBar.add(newGameButton);
         toolBar.add(newGameBrainButton);
         toolBar.addSeparator();
         toolBar.add(leaderBoardButton);
         toolBar.addSeparator();
-        toolBar.add(new JLabel("멀티플레이 "));
-        toolBar.add(createGameButton);
-        toolBar.add(joinGameButton);
         toolBar.setFloatable(false);
         return toolBar;
     }
