@@ -12,7 +12,7 @@ public class GameFrame extends JFrame {
     private JToolBar toolBar = makeToolBar();
     private GamePanel gamePanel = new GamePanel();
     private WordDialog wordDialog = new WordDialog(this);
-    private LeaderBoardDialog leaderBoardDialog = new LeaderBoardDialog(this);
+    private LeaderBoardDialog leaderBoardDialog;
     private AudioDialog audioDialog = new AudioDialog(this);
 
     public GameFrame() {
@@ -145,6 +145,7 @@ public class GameFrame extends JFrame {
     }
 
     public LeaderBoardDialog getLeaderBoardDialog() {
+        leaderBoardDialog = new LeaderBoardDialog(this);
         return leaderBoardDialog;
     }
 
