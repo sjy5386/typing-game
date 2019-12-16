@@ -89,14 +89,17 @@ public class GameFrame extends JFrame {
         JButton newGameButton = new JButton("새 클래식 게임");
         JButton newGameBrainButton = new JButton("새 브레인 게임");
         JButton leaderBoardButton = new JButton("리더보드");
+        JButton wordListButton = new JButton("단어 목록");
 
         newGameButton.setBackground(MyColor.LIGHT);
         newGameBrainButton.setBackground(MyColor.LIGHT);
         leaderBoardButton.setBackground(MyColor.LIGHT);
+        wordListButton.setBackground(MyColor.LIGHT);
 
         newGameButton.addActionListener(controller);
         newGameBrainButton.addActionListener(controller);
         leaderBoardButton.addActionListener(controller);
+        wordListButton.addActionListener(controller);
 
         toolBar.add(new JLabel(" 게임 시작 "));
         toolBar.add(newGameButton);
@@ -104,6 +107,7 @@ public class GameFrame extends JFrame {
         toolBar.addSeparator();
         toolBar.add(leaderBoardButton);
         toolBar.addSeparator();
+        toolBar.add(wordListButton);
         toolBar.setFloatable(false);
         return toolBar;
     }
