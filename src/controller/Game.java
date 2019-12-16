@@ -23,6 +23,7 @@ public class Game implements ActionListener, Runnable {
     private int score = 0;
     private int level = 1;
     private int life = 5;
+    private float time = 0.0f;
 
     protected boolean flag = true;
 
@@ -95,6 +96,11 @@ public class Game implements ActionListener, Runnable {
         view.getScorePanel().setLife(life);
     }
 
+    private void setTime(float time) {
+        this.time = time;
+        view.getScorePanel().setTime(time);
+    }
+
     public void stop() {
         flag = false;
         bgmPlayer.stop();
@@ -145,7 +151,10 @@ public class Game implements ActionListener, Runnable {
 
     @Override
     public void run() {
+        long startTime = System.currentTimeMillis();
         while (flag) {
+            long endTime = System.currentTimeMillis();
+            setTime((float) (endTime - startTime) / 1000);
             if (wordLabels.size() < level + 2)
                 addWordLabel();
             gc();
