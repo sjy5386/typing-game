@@ -34,6 +34,9 @@ public class Game implements ActionListener, Runnable {
         view.getGameGroundPanel().removeAll();
         view.getGameGroundPanel().revalidate();
         view.getGameGroundPanel().repaint();
+        view.getInputPanel().getInputText().setText("");
+        view.getInputPanel().getInputText().setFocusable(true);
+        view.getInputPanel().getInputText().requestFocus();
         bgmPlayer.load(MyAudio.BACKGROUND);
         bgmPlayer.setLoop(Clip.LOOP_CONTINUOUSLY);
         bgmPlayer.play();
