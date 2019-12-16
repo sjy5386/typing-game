@@ -1,8 +1,7 @@
 package controller;
 
 import model.*;
-import view.GamePanel;
-import view.WordLabel;
+import view.*;
 
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -112,6 +111,7 @@ public class Game implements ActionListener, Runnable {
         if (name != null) {
             Player player = new Player(name, score);
             leaderBoardManager.add(player);
+            leaderBoardManager.save();
         }
     }
 
