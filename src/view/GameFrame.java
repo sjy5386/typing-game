@@ -111,11 +111,11 @@ public class GameFrame extends JFrame {
         JButton createGameButton = new JButton("게임 생성");
         JButton joinGameButton = new JButton("게임 참가");
 
-        newGameButton.setBackground(MyColor.BASE);
-        newGameBrainButton.setBackground(MyColor.BASE);
-        leaderBoardButton.setBackground(MyColor.BASE);
-        createGameButton.setBackground(MyColor.BASE);
-        joinGameButton.setBackground(MyColor.BASE);
+        newGameButton.setBackground(MyColor.LIGHT);
+        newGameBrainButton.setBackground(MyColor.LIGHT);
+        leaderBoardButton.setBackground(MyColor.LIGHT);
+        createGameButton.setBackground(MyColor.LIGHT);
+        joinGameButton.setBackground(MyColor.LIGHT);
 
         newGameButton.addActionListener(controller);
         newGameBrainButton.addActionListener(controller);
